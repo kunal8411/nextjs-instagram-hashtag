@@ -3,13 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev": "next dev -p 8080",
+    "start": "next start -p 8080",
+    "build-cloudinary": "babel ./node_modules/cloudinary -d ./static/cloudinary"
+
   },
   "dependencies": {
     "@next/font": "13.1.6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bootstrap": "^5.2.3",
+    "clarifai": "^2.9.1",
+    "cloudinary": "^1.33.0",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "next": "13.1.6",
