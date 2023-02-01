@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [imageUrl, setImageUrl] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const Clarifai = require("clarifai");
   const app = new Clarifai.App({
@@ -44,6 +45,7 @@ export default function Home() {
         const tags = response.rawData.outputs[0].data.concepts.map(
           (concept) => concept.name
         );
+        setTags(tags);
         console.log(tags);
       })
       .catch((err) => {
@@ -96,11 +98,89 @@ export default function Home() {
                 <hr class="divider" />
               </div>
               <div class="col-lg-8 align-self-baseline">
-                <input type="file" onChange={handleImageUpload} />
-                {imageUrl && <img src={imageUrl} alt="Uploaded Image" />}
+                {/* <input type="file" onChange={handleImageUpload} /> */}
+
                 {/* <a class="btn btn-primary btn-xl" href="#about">
                   Find Out More
                 </a> */}
+
+                {/* {imageUrl && (
+                  <div> */}
+                <label
+                  for="upload-photo"
+                  className="text-white font-weight-bold"
+                >
+                  Upload Photo...
+                </label>
+                <input
+                  type="file"
+                  name="photo"
+                  id="upload-photo"
+                  onChange={handleImageUpload}
+                />
+                {/* </div>
+                )} */}
+
+                {imageUrl && (
+                  <div>
+                    <img
+                      src={imageUrl}
+                      alt="Uploaded Image"
+                      className="uploaded-image"
+                      accept="image/png, image/gif, image/jpeg"
+                    />
+                    {/* <div className="text-white font-weight-bold">
+                      generated Hashtags are....
+                    </div> */}
+                    <div class="list-group">
+                      <a
+                        href="#"
+                        class="list-group-item list-group-item-action active"
+                      >
+                        generated Hashtags are....
+                      </a>
+
+                      {tags.length > 0 &&
+                        tags.map((tag, index) => {
+                          return (
+                            <a
+                              href="#"
+                              key={index}
+                              className="list-group-item list-group-item-action"
+                            >
+                             {tag}
+                            </a>
+                          );
+                        })}
+
+                      {/* <a
+                        href="#"
+                        class="list-group-item list-group-item-action"
+                      >
+                        Dapibus ac facilisis in
+                      </a>
+                      <a
+                        href="#"
+                        class="list-group-item list-group-item-action"
+                      >
+                        Morbi leo risus
+                      </a>
+                      <a
+                        href="#"
+                        class="list-group-item list-group-item-action"
+                      >
+                        Porta ac consectetur ac
+                      </a>
+                      <a
+                        href="#"
+                        class="list-group-item list-group-item-action disabled"
+                      >
+                        Vestibulum at eros
+                      </a> */}
+                      {}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
